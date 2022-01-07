@@ -24,7 +24,7 @@
                   (.add d (StoredField. field-eid, ^bytes (mem/->on-heap (cc/->value-buffer (:crux.db/id doc)))))
                   (doseq [[k v] (filter (comp string? val) doc)]
                     ;; The actual term, which will be tokenized
-                    (.add d (TextField. (l/keyword->k k), v, Field$Store/YES)))
+                    (.add d (TextField. (l/keyword->k k), v, Field$Store/NO)))
                   ;; For eviction:
                   (.add d (StringField. field-eid, (l/->hash-str (:crux.db/id doc)), Field$Store/NO))
                   d)))
